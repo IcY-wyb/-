@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个人介绍</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+        }
+        .nav {
+            width: 200px;
+            background-color: #2c3e50;
+            color: white;
+            padding: 20px;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+            height: 100vh;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+        }
+        .nav-item {
+            padding: 10px;
+            border-radius: 5px;
+            margin: 8px 0; /* 增大标签之间的间距 */
+            transition: background 0.3s;
+            cursor: pointer;
+        }
+        .nav-item.active {
+            background-color: #34495e; /* 这个颜色会应用到被激活的项上 */
+        }
+        .nav-item:hover {
+            background-color: #1abc9c;
+        }
+        .nav-item a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+        }
+        .content {
+            flex: 1;
+            padding: 20px;
+            box-sizing: border-box;
+            position: relative;
+            background: linear-gradient(to bottom right, #003366, #8e2de2); /* 蓝色到紫色渐变背景 */
+            color: #FFFFFF; /* 标签字体颜色为白色 */
+            overflow: hidden; /* 确保背景装饰不会溢出 */
+        }
+        #canvas-container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        canvas {
+            width: 100% !important;
+            height: 100% !important;
+        }
+
+        /* 星星背景 */
+        .stars {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .stars div {
+            position: absolute;
+            border-radius: 50%;
+            background: white;
+            width: 2px;
+            height: 2px;
+            opacity: 0.8;
+            animation: twinkle 1.5s infinite;
+        }
+
+        /* 流星效果 */
+        .comets {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .comets div {
+            position: absolute;
+            width: 100px;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.8);
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+            opacity: 0;
+            transform: rotate(-45deg);
+            animation: comet 4s linear infinite;
+        }
+
+        @keyframes twinkle {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.5); opacity: 0.6; }
+            100% { transform: scale(1); opacity: 0.8; }
+        }
+
+        @keyframes comet {
+            0% {
+                opacity: 1;
+                transform: translate(100vw, -100vh) rotate(-45deg);
+            }
+            100% {
+                opacity: 0;
+                transform: translate(-100vw, 100vh) rotate(-45deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 左侧导航栏 -->
+    <div class="nav">
+        <div class="nav-item"><a href="2.html">个人信息</a></div>
+        <div class="nav-item"><a href="3.html">兴趣爱好</a></div>
+        <div class="nav-item"><a href="4.html">社会工作</a></div>
+        <div class="nav-item"><a href="5.html">科研竞赛</a></div>
+        <div class="nav-item active"><a href="6.html">朋友评价</a></div>
+    </div>
+
+    <!-- 右侧内容区域 -->
+    <div class="content">
+        <div class="stars" id="stars"></div>
+        <div class="comets" id="comets"></div>
+        <div id="canvas-container">
+            <canvas id="canvas" width="1500" height="800"></canvas>
+        </div>
+    </div>
+
+    <script src="https://cdn.bootcss.com/wordcloud2.js/1.1.0/wordcloud2.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Generate stars
+            const numStars = 100;
+            const starsContainer = document.getElementById('stars');
+            for (let i = 0; i < numStars; i++) {
+                const star = document.createElement('div');
+                star.style.top = `${Math.random() * 100}vh`;
+                star.style.left = `${Math.random() * 100}vw`;
+                star.style.width = `${Math.random() * 3 + 1}px`;
+                star.style.height = star.style.width;
+                starsContainer.appendChild(star);
+            }
+
+            // Generate comets
+            const numComets = 5;
+            const cometsContainer = document.getElementById('comets');
+            for (let i = 0; i < numComets; i++) {
+                const comet = document.createElement('div');
+                comet.style.top = `${Math.random() * 100}vh`;
+                comet.style.left = `${Math.random() * 100}vw`;
+                comet.style.width = `${Math.random() * 100 + 50}px`;
+                comet.style.height = '2px';
+                comet.style.animationDelay = `${Math.random() * 5}s`;
+                cometsContainer.appendChild(comet);
+            }
+
+            // Generate word cloud
+            var options = {
+                list: [
+                    ['热心市民', 10],
+                    ['慷慨', 9],
+                    ['平易近人', 7],
+                    ['体贴', 6],
+                    ['金铲铲', 4],
+                    ['阳光爱运动', 5],
+                    ['气质男神', 4],
+                    ['火象星座', 3],
+                    ['热情小狗', 3],
+                    ['积极乐观', 4],
+                    ['社交能力强', 5],
+                    ['组织能力强', 4],
+                    ['专业素质高', 4],
+                    ['做事认真负责', 3],
+                    ['善良', 4],
+                    ['聪明伶俐', 5],
+                    ['积极上进', 3],
+                    ['热情', 3]
+                ],
+                gridSize: 10,
+                weightFactor: 10,
+                fontWeight: 'bold',
+                fontFamily: 'Times, serif',
+                color: 'random-light',
+                backgroundColor: 'transparent',
+                rotateRatio: 0.5
+            };
+            var canvas = document.getElementById('canvas');
+            WordCloud(canvas, options);
+        });
+    </script>
+</body>
+</html>

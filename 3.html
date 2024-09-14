@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>个人介绍</title>
+<style>
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        display: flex;
+    }
+    h2{
+        text-align: center;
+    }
+    .nav {
+        width: 200px;
+        background-color: #2c3e50;
+        color: white;
+        padding: 20px;
+        box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+        height: 100vh;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+    }
+    .nav-item {
+        padding: 10px;
+        border-radius: 5px;
+        margin: 8px 0;
+        transition: background 0.3s;
+        cursor: pointer;
+    }
+    .nav-item.active {
+        background-color: #34495e;
+    }
+    .nav-item:hover {
+        background-color: #1abc9c;
+    }
+    .nav-item a {
+        color: white;
+        text-decoration: none;
+        font-size: 18px;
+    }
+    .content {
+        flex: 1;
+        padding: 20px;
+        box-sizing: border-box;
+        display: flex;
+        flex-wrap: wrap; /* Allows the items to wrap if needed */
+        gap: 20px; /* Space between items */
+    }
+    .module {
+        background: #ecf0f1;
+        border-radius: 8px;
+        padding: 20px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        flex: 1 1 45%; /* Grow to fit available space, but take up to 45% width */
+        min-width: 200px; /* Minimum width of each module */
+        box-sizing: border-box;
+    }
+    .module h2 {
+        margin-top: 0;
+    }
+    .bio img {
+        width: 474px; /* Fixed width */
+        height: 296px; /* Fixed height */
+        object-fit: cover; /* Ensures the image covers the given dimensions without distortion */
+        display: block; /* Removes the bottom space caused by inline-block elements */
+        margin: 0 auto; /* Centers the image horizontally */
+    }
+</style>
+</head>
+<body>
+<!-- 左侧导航栏 -->
+<div class="nav">
+    <div class="nav-item"><a href="2.html">个人信息</a></div>
+    <div class="nav-item active"><a href="3.html">兴趣爱好</a></div>
+    <div class="nav-item"><a href="4.html">社会工作</a></div>
+    <div class="nav-item"><a href="5.html">科研竞赛</a></div>
+    <div class="nav-item"><a href="6.html">朋友评价</a></div>
+</div>
+
+<!-- 右侧内容区域 -->
+<div class="content">
+    <div class="module">
+        <h2>追剧观漫</h2>
+        <p>喜欢看校园恋爱剧，无脑乱追，看过之后，只会觉得降智但是又充满乐趣！</p>
+        <p>平时看的是国漫，属于是爽文中男主崛起，自带外挂，无脑爽，调整压抑的情绪</p>
+        <div class="bio">
+            <img src="zhanshen.png" alt="个人图片">
+        </div>
+    </div>
+
+    <div class="module">
+        <h2>小猫小狗</h2>
+        <p>现实没养过宠物，但是每次刷视频都可以看到暖心的小猫小狗，不仅可以提供情绪价值，还可以给人一种想收养它的心，小猫的萌哒哒和小狗的忠实可爱都深深吸引着我。</p>
+        <div class="bio">
+            <img src="maogou.png" alt="个人图片">
+        </div>
+    </div>
+
+    <div class="module">
+        <h2>游戏达人</h2>
+        <p>平时闲下来的时候就是游戏人生，不仅仅是网络上的游戏，偶尔也与朋友一同出门游玩，热衷于羽毛球和台球，以及心情舒适下的一场观影体验。</p>
+        <div class="bio">
+            <img src="youxi.jpg" alt="个人图片">
+        </div>
+    </div>
+
+    <div class="module">
+        <h2>跑步蹬车</h2>
+        <p>怎么说呢，跑步可以陶冶情操，当你情绪低落，遇事所困，你可以猛冲一把，释放自己的压力，当你无事所做，悠闲的在校园里慢跑更是一种全新的体验；蹬车的快感，来自于速度的突破，每次速度更新，大腿酸痛，都会带来极致的体验。</p>
+        <div class="bio">
+            <img src="che.jpg" alt="个人图片">
+        </div>
+    </div>
+</div>
+</body>
+</html>

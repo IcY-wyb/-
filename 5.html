@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>个人介绍</title>
+<style>
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        display: flex;
+        background: #f4f4f4; /* 背景颜色 */
+    }
+    .nav {
+        width: 200px;
+        background-color: #2c3e50;
+        color: white;
+        padding: 20px;
+        box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+        height: 100vh;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+    }
+    .nav-item {
+        padding: 10px;
+        border-radius: 5px;
+        margin: 8px 0;
+        transition: background 0.3s;
+        cursor: pointer;
+    }
+    .nav-item.active {
+        background-color: #34495e; /* 这个颜色会应用到被激活的项上 */
+    }
+    .nav-item:hover {
+        background-color: #1abc9c;
+    }
+    .nav-item a {
+        color: white;
+        text-decoration: none;
+        font-size: 18px;
+    }
+    .content {
+        flex: 1;
+        padding: 20px;
+        box-sizing: border-box;
+        display: grid;
+        grid-template-rows: auto 1fr;
+        gap: 20px;
+        background: #ffffff; /* 背景颜色 */
+        border-radius: 8px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+    }
+    .top-section {
+        background: linear-gradient(135deg, #3498db, #8e2d); /* 渐变背景 */
+        color: white;
+        border-radius: 8px;
+        padding: 20px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        text-align: center;
+    }
+    .bottom-section {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+    .bottom-section .profile-info {
+        background: #ecf0f1;
+        border-radius: 8px;
+        padding: 20px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        transition: transform 0.3s, box-shadow 0.3s;
+        position: relative;
+        overflow: hidden;
+    }
+    .bottom-section .profile-info:hover {
+        transform: scale(1.05);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    }
+    .bottom-section .profile-info h1 {
+        margin: 0;
+        font-size: 22px;
+        color: #2c3e50;
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+    }
+    .bottom-section .profile-info p {
+        margin: 10px 0;
+        font-size: 16px;
+    }
+    h1 {
+        text-align: center;
+        color: white;
+        font-size: 28px;
+        margin: 0;
+    }
+    p {
+        text-align: center;
+        font-size: 18px;
+    }
+    .image-container {
+        width: 100%; /* 图片容器宽度 */
+        text-align: center; /* 图片居中对齐 */
+    }
+    .image-container img {
+        max-width: 80%; /* 图片最大宽度 */
+        height: auto; /* 保持纵横比 */
+        border-radius: 8px; /* 可选: 为图片添加圆角 */
+    }
+</style>
+</head>
+<body>
+<!-- 左侧导航栏 -->
+<div class="nav">
+    <div class="nav-item"><a href="2.html">个人信息</a></div>
+    <div class="nav-item"><a href="3.html">兴趣爱好</a></div>
+    <div class="nav-item"><a href="4.html">社会工作</a></div>
+    <div class="nav-item active"><a href="5.html">科研竞赛</a></div>
+    <div class="nav-item"><a href="6.html">朋友评价</a></div>
+</div>
+
+<!-- 右侧内容区域 -->
+<div class="content">
+    <!-- 上半部分 -->
+    <div class="top-section">
+        <h1>大创</h1>
+        <p>国家级四作</p>
+        <div class="image-container">
+            <img src="大创.jpg" alt="照片">
+        </div>
+        <p>校级四作</p>
+    </div>
+
+    <!-- 下半部分 -->
+    <div class="bottom-section">
+        <div class="profile-info">
+            <h1>数学建模</h1>
+            <p>妈妈杯——三等奖</p>
+            <p>认证杯——二等奖</p>
+            <p>校赛——三等奖</p>
+            <p>亚太——参与奖</p>
+        </div>
+        <div class="profile-info">
+            <h1>学科竞赛</h1>
+            <p>速算——校三等奖</p>
+            <p>数学竞赛——校三等奖</p>
+        </div>
+        <div class="profile-info">
+            <h1>互联网+</h1>
+            <p>校级二等奖</p>
+        </div>
+        <div class="profile-info">
+            <h1>征文</h1>
+            <p>毛泽东征文比赛——院优秀奖</p>
+        </div>
+    </div>
+</div>
+</body>
+</html>

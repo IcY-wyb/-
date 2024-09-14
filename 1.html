@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Cool Introduction</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<style>
+    body {
+        font-family: 'Roboto', sans-serif;
+        margin: 0;
+        padding: 0;
+        overflow: hidden; /* 避免滚动条 */
+        color: #380;
+    }
+    .starfield {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 50vh; /* 星星背景占据视口的上半部分 */
+        background: linear-gradient(135deg, #0f0c29, #302b63, #24243e); /* 黑蓝天渐变背景 */
+        overflow: hidden;
+        z-index: -1;
+    }
+    .star {
+        position: absolute;
+        border-radius: 50%;
+        background: white;
+        opacity: 0.8;
+        animation: blink 1.5s infinite;
+    }
+    @keyframes blink {
+        0% { opacity: 0.5; }
+        50% { opacity: 1; }
+        100% { opacity: 0.5; }
+    }
+    .intro {
+        background: rgba(255, 255, 255, 0.9); /* 半透明白色背景 */
+        border-radius: 12px;
+        padding: 30px;
+        margin: 0 auto;
+        max-width: 600px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        transition: transform 0.3s, box-shadow 0.3s;
+        position: relative;
+        top: 50vh; /* 内容在星星下方 */
+        text-align: center; /* 确保内容在容器中居中 */
+    }
+    .intro:hover {
+        transform: scale(1.05);
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+    }
+    a {
+        color: #00d2d3;
+        text-decoration: none;
+        font-weight: 500;
+        display: inline-flex;
+        align-items: center;
+        transition: color 0.3s;
+        font-size: 20px;
+    }
+    a:hover {
+        color: #ffffff;
+    }
+    .icon {
+        margin-left: 8px;
+        font-size: 24px;
+    }
+    .button {
+        background: #09d3d3; /* 修正颜色代码 */
+        color: #380;
+        padding: 10px 20px;
+        border-radius: 5px;
+        text-transform: none; /* 保留小写 */
+        font-weight: 500;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center; /* 确保按钮内的图标和文本在按钮中居中 */
+        transition: background 0.3s;
+        margin: 20px auto; /* 确保按钮在容器中居中 */
+        font-size: 20px; /* 使字体大小与内容一致 */
+    }
+    .button:hover {
+        background: #007ff7;
+    }
+    .background-bottom {
+        background: linear-gradient(to top, #0f0c29, #302b63, #24243e); /* 从下向上的渐变 */
+        height: 50vh; /* 填满下半部分 */
+        width: 100%;
+    }
+    .music-control {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background: rgba(0, 0, 0, 0.6);
+        border-radius: 50%;
+        padding: 15px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+        cursor: pointer;
+        color: white;
+        transition: background 0.3s;
+    }
+    .music-control:hover {
+        background: rgba(0, 0, 0, 0.8);
+    }
+    .music-control .fa {
+        font-size: 24px;
+    }
+</style>
+</head>
+<body>
+<div class="starfield" id="starfield"></div>
+<div class="intro">
+    <h1>Welcome to you!</h1>
+    <p>
+        请看我的个人信息！
+        （点击 me）
+    </p>
+    <div class="button">
+        <a href="2.html">me<i class="fas fa-user icon"></i></a>
+    </div>
+    <p>
+        注意：进入图片之后自行点击左上方返回！
+    </p>
+</div>
+<div class="background-bottom"></div> <!-- 渐变背景部分 -->
+
+<!-- 添加背景音乐 -->
+<audio id="background-music" src="bei1.mp3" autoplay loop>
+    Your browser does not support the audio element.
+</audio>
+
+
+<!-- 音乐控制图标 -->
+<div class="music-control" id="music-control">
+    <i class="fas fa-volume-up" id="music-icon"></i>
+</div>
+
+<script>
+    function createStar() {
+        const star = document.createElement('div');
+        star.className = 'star';
+        const size = Math.random() * 3 + 1; // 随机大小
+        const left = Math.random() * 100; // 随机位置
+        const top = Math.random() * 50; // 随机位置，只在上半部分
+        star.style.width = `${size}px`;
+        star.style.height = `${size}px`;
+        star.style.left = `${left}vw`;
+        star.style.top = `${top}vh`;
+        return star;
+    }
+
+    function createMeteor() {
+        const meteor = document.createElement('div');
+        meteor.className = 'star';
+        const length = Math.random() * 60 + 20; // 流星长度
+        const top = Math.random() * 50; // 流星起始位置
+        meteor.style.width = `${length}px`;
+        meteor.style.height = '2px'; // 流星高度
+        meteor.style.background = 'linear-gradient(to right, #ffffff, transparent)'; // 流星渐变
+        meteor.style.left = `${Math.random() * 100}vw`;
+        meteor.style.top = `${top}vh`;
+        meteor.style.transform = `rotate(${Math.random() * 45 - 22.5}deg)`; // 随机角度
+        meteor.style.animation = 'shoot 1s linear';
+        return meteor;
+    }
+
+    function generateStars(count) {
+        const starfield = document.getElementById('starfield');
+        for (let i = 0; i < count; i++) {
+            starfield.appendChild(createStar());
+        }
+    }
+
+    function generateMeteors(count) {
+        const starfield = document.getElementById('starfield');
+        for (let i = 0; i < count; i++) {
+            starfield.appendChild(createMeteor());
+        }
+    }
+
+    generateStars(200); // 生成200个星星
+    generateMeteors(20); // 生成20个流星
+
+    // 流星动画
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes shoot {
+            0% { transform: translateX(0) translateY(0); }
+            100% { transform: translateX(100vw) translateY(100vh); }
+        }
+    `;
+    document.head.appendChild(style);
+
+    // 控制音频播放
+    const musicControl = document.getElementById('music-control');
+    const backgroundMusic = document.getElementById('background-music');
+    const musicIcon = document.getElementById('music-icon');
+
+    musicControl.addEventListener('click', () => {
+        if (backgroundMusic.paused) {
+            backgroundMusic.play();
+            musicIcon.className = 'fas fa-volume-up';
+        } else {
+            backgroundMusic.pause();
+            musicIcon.className = 'fas fa-volume-off'; // 使用音量关闭图标
+        }
+    });
+</script>
+</body>
+</html>
